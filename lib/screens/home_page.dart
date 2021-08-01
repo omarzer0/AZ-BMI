@@ -37,112 +37,114 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('AZ BMI'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // Text('Gender', style: kAppTextStyle),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Text('Gender', style: kAppTextStyle),
 
-          Row(
-            children: [
-              Expanded(
-                child: ReusableCard(
-                  onPress: () {
-                    setState(() {
-                      selectedGender = SelectedGender.male;
-                    });
-                  },
-                  bgColor: kDeepGrayCardBgColor,
-                  cardChild: ImageWithCheckbox(
-                    title: 'Male',
-                    icon: FontAwesomeIcons.male,
-                    isSelected: selectedGender == SelectedGender.male,
+            Row(
+              children: [
+                Expanded(
+                  child: ReusableCard(
+                    onPress: () {
+                      setState(() {
+                        selectedGender = SelectedGender.male;
+                      });
+                    },
+                    bgColor: kDeepGrayCardBgColor,
+                    cardChild: ImageWithCheckbox(
+                      title: 'Male',
+                      icon: FontAwesomeIcons.male,
+                      isSelected: selectedGender == SelectedGender.male,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: ReusableCard(
-                  onPress: () {
-                    setState(() {
-                      selectedGender = SelectedGender.female;
-                    });
-                  },
-                  bgColor: kDeepGrayCardBgColor,
-                  cardChild: ImageWithCheckbox(
-                    title: 'Female',
-                    icon: FontAwesomeIcons.venus,
-                    isSelected: selectedGender == SelectedGender.female,
+                Expanded(
+                  child: ReusableCard(
+                    onPress: () {
+                      setState(() {
+                        selectedGender = SelectedGender.female;
+                      });
+                    },
+                    bgColor: kDeepGrayCardBgColor,
+                    cardChild: ImageWithCheckbox(
+                      title: 'Female',
+                      icon: FontAwesomeIcons.venus,
+                      isSelected: selectedGender == SelectedGender.female,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
 
-          TextAlignedToRight(text: 'Weight'),
-          // Escaping map error on null (idk)
-          MyCard(
-            dropDownListNumber: 1,
-            shownNumber: weight,
-            onStartIconPress: () {
-              setState(() {
-                weight--;
-              });
-            },
-            onEndIconPress: () {
-              setState(() {
-                weight++;
-              });
-            },
-          ),
-          TextAlignedToRight(text: 'Height'),
-          MyCard(
-            dropDownListNumber: 2,
-            shownNumber: height,
-            onStartIconPress: () {
-              setState(() {
-                height--;
-              });
-            },
-            onEndIconPress: () {
-              setState(() {
-                height++;
-              });
-            },
-          ),
-          TextAlignedToRight(text: 'Age'),
-
-          ReusableCard(
-            bgColor: kMainCardGbColor,
-            cardChild: CardWithTextAndTwoRoundButtons(
-              cardNumberText: age,
-              startIcon: FontAwesomeIcons.minus,
-              endIcon: FontAwesomeIcons.plus,
+            TextAlignedToRight(text: 'Weight'),
+            // Escaping map error on null (idk)
+            MyCard(
+              dropDownListNumber: 1,
+              shownNumber: weight,
               onStartIconPress: () {
                 setState(() {
-                  age--;
+                  weight--;
                 });
               },
               onEndIconPress: () {
                 setState(() {
-                  age++;
+                  weight++;
                 });
               },
             ),
-          ),
-
-          BottomButton(
-              onTap: () {
-                CalculatorBrain brain = CalculatorBrain(height, weight);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResultPage(brain.calculateBMI(),
-                        brain.getResults(), brain.getInterpretation()),
-                  ),
-                );
+            TextAlignedToRight(text: 'Height'),
+            MyCard(
+              dropDownListNumber: 2,
+              shownNumber: height,
+              onStartIconPress: () {
+                setState(() {
+                  height--;
+                });
               },
-              buttonTitle: 'CALCULATE'),
+              onEndIconPress: () {
+                setState(() {
+                  height++;
+                });
+              },
+            ),
+            TextAlignedToRight(text: 'Age'),
 
-        ],
+            ReusableCard(
+              bgColor: kMainCardGbColor,
+              cardChild: CardWithTextAndTwoRoundButtons(
+                cardNumberText: age,
+                startIcon: FontAwesomeIcons.minus,
+                endIcon: FontAwesomeIcons.plus,
+                onStartIconPress: () {
+                  setState(() {
+                    age--;
+                  });
+                },
+                onEndIconPress: () {
+                  setState(() {
+                    age++;
+                  });
+                },
+              ),
+            ),
+
+            BottomButton(
+                onTap: () {
+                  CalculatorBrain brain = CalculatorBrain(height, weight);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultPage(brain.calculateBMI(),
+                          brain.getResults(), brain.getInterpretation()),
+                    ),
+                  );
+                },
+                buttonTitle: 'CALCULATE'),
+
+          ],
+        ),
       ),
     );
   }

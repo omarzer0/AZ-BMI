@@ -16,12 +16,12 @@ class ResultPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: Container(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
               padding: EdgeInsets.all(15.0),
               alignment: Alignment.bottomLeft,
               child: Text(
@@ -29,51 +29,55 @@ class ResultPage extends StatelessWidget {
                 style: kLargeTextStyle,
               ),
             ),
-          ),
-          Expanded(
-            flex: 5,
-            child: ReusableCard(
+            ReusableCard(
               onPress: () {},
               bgColor: kBottomContainerNgColor,
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    resultText.toUpperCase(),
-                    style: kLargeTextStyle,
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.all(Radius.circular(100))),
+                  Padding(
+                    padding: EdgeInsets.only(top: 8),
                     child: Text(
-                      bmiResult,
+                      resultText.toUpperCase(),
                       style: kLargeTextStyle,
-                      textAlign: TextAlign.center,
                     ),
                   ),
-                  Text(
-                    interpretation,
-                    textAlign: TextAlign.center,
-                    style: kLargeTextStyle,
+                  Padding(
+                    padding: EdgeInsets.only(top: 32,bottom: 32),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.all(Radius.circular(100))),
+                      child: Text(
+                        bmiResult,
+                        style: kLargeTextStyle,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      interpretation,
+                      textAlign: TextAlign.center,
+                      style: kLargeTextStyle,
+                    ),
                   )
                 ],
               ),
             ),
-          ),
-          Expanded(
-            child: BottomButton(
+            BottomButton(
               onTap: () {
                 Navigator.pop(context);
               },
               buttonTitle: 'RE-CALCULATE',
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
